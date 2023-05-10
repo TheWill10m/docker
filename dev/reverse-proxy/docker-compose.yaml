@@ -4,9 +4,15 @@ services:
   nginx:
     container_name: nginx
     image: nginx:1.23.4-alpine
+    networks:
+      - proxy
     ports:
       - 80:80
       - 443:443
     volumes:
       - /etc/docker-volumes/nginx/conf.d/:/etc/nginx/conf.d/:ro
       - /etc/docker-volumes/nginx/certs/:/certs/:ro
+
+networks:
+  proxy:
+    external: true
